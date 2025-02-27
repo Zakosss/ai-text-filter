@@ -21,6 +21,7 @@ export default async (sentenceString: string): Promise<Score> => {
     } else {
         const params: OpenAI.Chat.ChatCompletionCreateParams = {
             messages: [
+                { role: 'system', content: '"Explicit content" refers to something that, when clearly shown without censoring, would be considered inappropriate for some viewers or listeners. Violence, nudity, and swearing are sometimes referred to as explicit content.' },
                 { role: 'system', content: 'You are a tool to rate the explicitness of a sentence from 0 to 1 as a float.' },
                 { role: 'system', content: 'You must also return a reason behind the rating.' },
                 { role: 'system', content: `You must return in json format: { "score": 0, "reason": "reason here" }` },
