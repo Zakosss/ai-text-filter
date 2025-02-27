@@ -1,8 +1,8 @@
-import { useState } from 'react'
+//import { useState } from 'react'
 import { Header } from './components';
 import {  BrowserRouter as Router, Routes, Route  } from 'react-router-dom';
 import WordList from './pages/wordList'
-import WordsBlocked from './pages/wordBlocked'
+import WordsSingle from './pages/wordSingle'
 import About from './pages/about'
 
 function App() {
@@ -12,7 +12,7 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<WordList />} />
-        <Route path="/blocked" element={<WordsBlocked />} />
+        <Route path="/word-check" element={<WordsSingle />} />
         <Route path="/about" element={<About />} />
       </Routes>
     </Router>
