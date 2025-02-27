@@ -1,4 +1,6 @@
-export type RatingResponse = {
+type RatingResponse = {
     score: number,
     reason: string
 }
+
+export default RatingResponse

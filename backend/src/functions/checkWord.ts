@@ -2,7 +2,7 @@ import { openaiClient, prismaClient } from "@/index";
 import { Score } from "@prisma/client";
 import OpenAI from "openai";
 
-import { RatingResponse } from "@/types/ratingResponse";
+import RatingResponse from "@/types/ratingResponse";
 
 export default async (wordString: string): Promise<Score> => {
     wordString = wordString.toLowerCase().replace(/\s+/g, '')
