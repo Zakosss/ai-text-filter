@@ -1,2 +1,15 @@
 @import "tailwindcss";
 
+@theme {
+    /* Custom theme variables */
+    --color-border: #9b9b9b;
+    --color-background: #ffffff;
+    --color-primary: #F0F0F0;
+    --color-buttonDown: #D9D9D9;
+}
+
+/** 
+@custom-variant dark [data-theme="dark"] {
+    
+}
+*/

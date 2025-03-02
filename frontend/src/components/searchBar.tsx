@@ -16,11 +16,11 @@ const SearchBar: React.FC = () => {
     }
 
     return (
-        <div className='h-10 flex items-center justify-center border-1 rounded-full border-[#9b9b9b] shadow-[inset_0_4px_8px_rgba(0,0,0,0.12)] pl-1 pr-1'>
+        <div className='h-10 w-1/3 flex items-center justify-center border-1 rounded-full border-border shadow-[inset_0_4px_8px_rgba(0,0,0,0.12)] pl-1 pr-1'>
             <input 
                 type="text" 
                 placeholder="Search for a word" 
-                className="h-full w-full pl-2 pr-2 text-black rounded-full focus:outline-none focus:bg-[#F0F0F0]"
+                className="h-full w-full pl-2 pr-2 text-black rounded-full focus:outline-none focus:bg-primary"
                 value={search}
                 onChange={handleInputChange}
                 onKeyDown={handleKeyDown}

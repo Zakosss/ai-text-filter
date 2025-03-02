@@ -10,9 +10,9 @@ type WordCardProps = {
 
 const WordCard: React.FC<WordCardProps> = ({ score, word, explanation, onAdd, onIgnore }) => {
     return (
-        <div className="flex w-full min-h-[220px] max-w-2xl bg-white rounded-2xl border shadow-lg border-[#9b9b9b]">
+        <div className="flex w-full min-h-[220px] max-w-2xl bg-white rounded-2xl border shadow-lg border-border">
             {/* Left side */}
-            <div className="w-1/3 bg-[#F0F0F0] flex flex-wrap items-center justify-center rounded-l-2xl ">
+            <div className="w-1/3 bg-background flex flex-wrap items-center justify-center rounded-l-2xl ">
                 <h1 className="text-4xl font-bold">{score}</h1>
             </div>
 
@@ -25,11 +25,11 @@ const WordCard: React.FC<WordCardProps> = ({ score, word, explanation, onAdd, on
                 {/* Buttons */}
                 <div className="flex mt-4 gap-4">
                     <button 
-                        className="px-4 py-2 bg-[#F0F0F0] rounded-md text-black hover:bg-[#D9D9D9] mb-4"
+                        className="px-4 py-2 bg-primary rounded-md text-black hover:bg-buttonDown mb-4"
                         onClick={onAdd}>Add word to db
                     </button>
                     <button 
-                        className="px-4 py-2 bg-[#F0F0F0] rounded-md text-black hover:bg-[#D9D9D9] mb-4"
+                        className="px-4 py-2 bg-primary rounded-md text-black hover:bg-buttonDown mb-4"
                         onClick={onIgnore}>Ignore Word
                     </button>
                 </div>

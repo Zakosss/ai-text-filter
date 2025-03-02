@@ -1,11 +1,11 @@
 //import headerPages from '@/util/headerPages'
 
-import HeaderButton from './headerButton';
+import HeaderButton from './HeaderButton';
 
-export default function header () {
+export default function Header () {
     return (
         <div className='w-full h-10 flex items-center justify-center p-10'>
-            <div className='h-10 flex items-center justify-center border-1 rounded-full border-[#9b9b9b] shadow-[inset_0_4px_8px_rgba(0,0,0,0.12)] pl-1 pr-1'>
+            <div className='h-10 flex items-center justify-center border-1 rounded-full border-border shadow-[inset_0_4px_8px_rgba(0,0,0,0.12)] pl-1 pr-1'>
                 <HeaderButton name="List Check" path="" />
                 <HeaderButton name="Word Check" path="/word-check" />
                 <HeaderButton name="About" path="/about" />
