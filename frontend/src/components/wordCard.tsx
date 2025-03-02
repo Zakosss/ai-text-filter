@@ -12,7 +12,7 @@ const WordCard: React.FC<WordCardProps> = ({ score, word, explanation, onAdd, on
     return (
         <div className="flex w-full min-h-[220px] max-w-2xl bg-white rounded-2xl border shadow-lg border-border">
             {/* Left side */}
-            <div className="w-1/3 bg-background flex flex-wrap items-center justify-center rounded-l-2xl ">
+            <div className="w-1/3 bg-primary flex flex-wrap items-center justify-center rounded-l-2xl ">
                 <h1 className="text-4xl font-bold">{score}</h1>
             </div>
 
