@@ -1,5 +1,5 @@
 import { Request, Response } from 'express';
-import checkWord from '@/functions/checkWord';
+import checkWord from '@/functions/v1/checkWordExplicit';
 import createReturnData from '@/functions/createReturnData';
 
 export default async (req: Request, res: Response) => {
@@ -10,6 +10,6 @@ export default async (req: Request, res: Response) => {
     }
 
     const scores = await Promise.all(tasks)
-    const returnData = createReturnData('Success', scores.map(score => ({ score: score.explicitness, reason: score.explicitnessReasoning })));
+    const returnData = createReturnData('Success', scores.map(score => ({ score: score.value, reason: score.reason })));
     res.status(200).json(returnData);
 }

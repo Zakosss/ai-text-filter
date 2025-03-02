@@ -13,32 +13,32 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Word {
-  id        Int      @id @default(autoincrement())
-  string    String   @unique
-  score     Score?   @relation("wordScore")
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+enum TextType {
+  WORD
+  SENTENCE
 }
 
-model Sentence {
+enum ScoreType {
+  EXPLICIT
+  SENTIMENT
+  POLITICAL
+  SPAM
+}
+
+model TextItem {
   id        Int      @id @default(autoincrement())
   string    String   @unique
-  score     Score?   @relation("sentenceScore")
+  scores    Score[]
+  type      TextType
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
 
 model Score {
-  id                     Int       @id @default(autoincrement())
-  wordId                 Int?      @unique
-  sentenceId             Int?      @unique
-  word                   Word?     @relation("wordScore", fields: [wordId], references: [id])
-  sentence               Sentence? @relation("sentenceScore", fields: [sentenceId], references: [id])
-  explicitness           Float
-  explicitnessReasoning  String
-  politicalness          Float
-  politicalnessReasoning String
-  createdAt              DateTime  @default(now())
-  updatedAt              DateTime  @updatedAt
+  id         Int       @id @default(autoincrement())
+  type       ScoreType
+  value      Float
+  reason     String
+  textItemId Int
+  textItem   TextItem  @relation(fields: [textItemId], references: [id])
 }

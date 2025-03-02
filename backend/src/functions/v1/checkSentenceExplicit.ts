@@ -7,17 +7,24 @@ import RatingResponse from "@/types/ratingResponse";
 export default async (sentenceString: string): Promise<Score> => {
     sentenceString = sentenceString.toLowerCase().replace(/\s+/g, ' ')
 
-    const sentence = await prismaClient.sentence.findUnique({
+    const sentence = await prismaClient.textItem.findUnique({
         where: {
-            string: sentenceString
+            string: sentenceString,
+            type: 'SENTENCE'
         },
         include: {
-            score: true
+            scores: {
+                where: {
+                    type: 'EXPLICIT'
+                }
+            }
         }
     })
     
-    if (sentence !== null) {
-        return sentence.score!
+    const explicitScore = sentence?.scores[0]
+
+    if (explicitScore !== undefined) {
+        return explicitScore
     } else {
         const params: OpenAI.Chat.ChatCompletionCreateParams = {
             messages: [
@@ -35,21 +42,40 @@ export default async (sentenceString: string): Promise<Score> => {
         const chatCompletion: OpenAI.Chat.ChatCompletion = await openaiClient.chat.completions.create(params)
         const ratingResponse: RatingResponse = JSON.parse(chatCompletion.choices[0]?.message.content!)
 
-        const createdSentence = await prismaClient.sentence.create({
-            data: {
-                string: sentenceString,
-                score: {
-                    create: {
-                        explicitness: ratingResponse.score,
-                        explicitnessReasoning: ratingResponse.reason
+        if (sentence === null) {
+            const createdSentence = await prismaClient.textItem.create({
+                data: {
+                    string: sentenceString,
+                    type: 'SENTENCE',
+                    scores: {
+                        create: {
+                            type: 'EXPLICIT',
+                            value: ratingResponse.score,
+                            reason: ratingResponse.reason
+                        }
+                    }
+                },
+                include: {
+                    scores: {
+                        where: {
+                            type: 'EXPLICIT'
+                        }
                     }
                 }
-            },
-            include: {
-                score: true
-            }
-        })
+            })
 
-        return createdSentence.score!
+            return createdSentence.scores[0]
+        } else {
+            const createdScore = await prismaClient.score.create({
+                data: {
+                    type: 'EXPLICIT',
+                    value: ratingResponse.score,
+                    reason: ratingResponse.reason,
+                    textItemId: sentence.id
+                }
+            })
+
+            return createdScore
+        }
     }
 }
