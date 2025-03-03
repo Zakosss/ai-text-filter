@@ -1,8 +1,8 @@
-import express from "express";
-import text from "./text";
+import { Router } from "express";
+import explicitness from "./explicitness";
 
-const router = express.Router();
+const router = Router()
 
-router.use("/text", text);
+router.use('/explicitness', explicitness);
 
 export default router;

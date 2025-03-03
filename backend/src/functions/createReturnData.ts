@@ -1,4 +1,4 @@
-export default (statusMessage: string, data: any, error?: string) => {
+export default (statusMessage?: string, data?: any, error?: string) => {
     return {
         message: statusMessage,
         data: data,
