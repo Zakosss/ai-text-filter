@@ -5,7 +5,7 @@ import OpenAI from "openai";
 import RatingResponse from "@/types/ratingResponse";
 
 export default async (wordString: string): Promise<Score> => {
-    wordString = wordString.toLowerCase().replace(/\s+/g, ' ')
+    wordString = wordString.toLowerCase().replace(/\s+/g, '')
 
     const word = await prismaClient.textItem.findUnique({
         where: {
